@@ -3,14 +3,13 @@ package testing;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class Exercise12_12Test {
 
-	@Before
-	public static void setUpBeforeClass() throws Exception {
-	}
+//	@Before
+//	public static void setUpBeforeClass() throws Exception {
+//	}
 
 	@Test
 	void testReformator() throws Exception {

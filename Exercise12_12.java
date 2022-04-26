@@ -36,34 +36,19 @@ public class Exercise12_12 {
 			System.out.println("Source file " + args[0] + " not exist");
 			System.exit(2);
 		}
-		StringBuilder buffer = new StringBuilder();
+		StringBuffer buffer = new StringBuffer();
 		Scanner input = new Scanner(sourceFile);
 		while (input.hasNext()) {
 			String s = input.nextLine();
 			String s1 = s.trim();
 			myExceptions m = new myExceptions(args, s, s1);
-			try {
-				m.reformatChk(s, s1);
-			} catch (Exception ex) {
-				buffer.append(" {");
-				try {
-					m.reformator(s, s1);
-				} catch (Exception exc) {
-					buffer.append("\r\n" + s.replace('{', ' '));
-					input.close();
-					// Write buffer into the file
-					PrintWriter output = new PrintWriter(sourceFile);
-					output.print(buffer.toString());
-					output.close();
-				}
+
+			try (PrintWriter output = new PrintWriter(sourceFile)) {
+				m.reformator(s, s1);
+			} catch (Exception exc) {
+				buffer.append("\r\n" + s.replace('{', ' '));
 			}
-			buffer.append("\r\n" + s);
 		}
-		input.close();
-		// Write buffer into the file
-		PrintWriter output = new PrintWriter(sourceFile);
-		output.print(buffer.toString());
-		output.close();
 
 	}
 
